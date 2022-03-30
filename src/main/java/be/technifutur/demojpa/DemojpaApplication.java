@@ -12,10 +12,9 @@ public class DemojpaApplication
 	public static void main(String[] args)
 	{
 		ApplicationContext context = SpringApplication.run(DemojpaApplication.class, args);
-
 		SectionDAO dao = context.getBean(SectionDAO.class);
 
-		Section section = dao.getOne(1010);
+		/*Section section = dao.getOne(1010);
 
 		System.out.println(section);
 
@@ -25,6 +24,15 @@ public class DemojpaApplication
 			System.out.println(dao.getOne(10000));
 		else
 			System.out.println("Pas ajouté");
+
+		Section toUpdate = dao.getOne(10000);
+		toUpdate.setName("testzzzzzzz to update");
+		toUpdate.setDelegateId(2L);
+
+		dao.update(10000, toUpdate);
+		System.out.println(dao.getOne(10000));*/
+
+		dao.getAll().forEach(System.out::println);
 	}
 
 }

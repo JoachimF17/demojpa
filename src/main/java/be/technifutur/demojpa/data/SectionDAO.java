@@ -3,9 +3,8 @@ package be.technifutur.demojpa.data;
 import be.technifutur.demojpa.models.entities.Section;
 import org.springframework.stereotype.Component;
 
-import javax.persistence.EntityExistsException;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
+import javax.persistence.*;
+import java.util.List;
 
 @Component
 public class SectionDAO
@@ -63,5 +62,29 @@ public class SectionDAO
         {
             manager.close();
         }
+    }
+
+    public void update(long id, Section updated)
+    {
+        EntityManager manager = managerFactory.createEntityManager();
+        EntityTransaction transaction = manager.getTransaction();
+        Section toUpdate = manager.find(Section.class, id);
+
+        transaction.begin();
+
+        if(toUpdate != null)
+        {
+            toUpdate.setName(updated.getName());
+            toUpdate.setDelegateId(updated.getDelegateId());
+            transaction.commit();
+        }else
+            transaction.rollback();
+
+        manager.close();
+    }
+
+    public List<Section> getAll()
+    {
+        return managerFactory.createEntityManager().createQuery("SELECT s FROM Section s", Section.class).getResultList();
     }
 }
