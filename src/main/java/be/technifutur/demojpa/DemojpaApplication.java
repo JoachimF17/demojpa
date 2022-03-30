@@ -1,7 +1,7 @@
 package be.technifutur.demojpa;
 
-import be.technifutur.demojpa.data.SectionDAO;
-import be.technifutur.demojpa.models.entities.Section;
+import be.technifutur.demojpa.data.CoursRepository;
+import be.technifutur.demojpa.data.SectionRepository;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
@@ -12,7 +12,8 @@ public class DemojpaApplication
 	public static void main(String[] args)
 	{
 		ApplicationContext context = SpringApplication.run(DemojpaApplication.class, args);
-		SectionDAO dao = context.getBean(SectionDAO.class);
+		SectionRepository dao = context.getBean(SectionRepository.class);
+		CoursRepository coursRepository = context.getBean(CoursRepository.class);
 
 		/*Section section = dao.getOne(1010);
 
@@ -30,9 +31,12 @@ public class DemojpaApplication
 		toUpdate.setDelegateId(2L);
 
 		dao.update(10000, toUpdate);
-		System.out.println(dao.getOne(10000));*/
+		System.out.println(dao.getOne(10000));
 
-		dao.getAll().forEach(System.out::println);
+		dao.getAll().forEach(System.out::println);*/
+
+		System.out.println(coursRepository.getOne("EG1010"));
+		coursRepository.getAll().forEach(System.out::println);
 	}
 
 }

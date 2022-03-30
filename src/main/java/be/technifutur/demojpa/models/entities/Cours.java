@@ -1,7 +1,6 @@
 package be.technifutur.demojpa.models.entities;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,7 +9,8 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "Course")
-@Getter @Setter
+@Getter @Setter @ToString
+@NoArgsConstructor @AllArgsConstructor
 public class Cours
 {
     @Id @Column(name = "course_id", length = 8)

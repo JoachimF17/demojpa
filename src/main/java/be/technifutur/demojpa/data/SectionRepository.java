@@ -1,17 +1,17 @@
 package be.technifutur.demojpa.data;
 
 import be.technifutur.demojpa.models.entities.Section;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import javax.persistence.*;
 import java.util.List;
 
-@Component
-public class SectionDAO
+@Repository
+public class SectionRepository
 {
     private final EntityManagerFactory managerFactory;
 
-    public SectionDAO(EntityManagerFactory managerFactory)
+    public SectionRepository(EntityManagerFactory managerFactory)
     {
         this.managerFactory = managerFactory;
     }

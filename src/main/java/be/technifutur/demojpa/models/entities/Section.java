@@ -1,16 +1,13 @@
 package be.technifutur.demojpa.models.entities;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
 @Entity
-@Getter @Setter
+@Getter @Setter @ToString
 @AllArgsConstructor @NoArgsConstructor
 public class Section
 {
@@ -20,14 +17,4 @@ public class Section
     private String name;
     @Column(columnDefinition = "INT(11)")
     private Long delegateId;
-
-    @Override
-    public String toString()
-    {
-        return "Section{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", delegateId=" + delegateId +
-                '}';
-    }
 }
