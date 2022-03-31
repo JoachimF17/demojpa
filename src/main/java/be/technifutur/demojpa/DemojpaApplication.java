@@ -16,8 +16,8 @@ public class DemojpaApplication
 	public static void main(String[] args)
 	{
 		ApplicationContext context = SpringApplication.run(DemojpaApplication.class, args);
-		SectionRepository dao = context.getBean(SectionRepository.class);
-		CoursRepository coursRepository = context.getBean(CoursRepository.class);
+//		SectionRepository dao = context.getBean(SectionRepository.class);
+//		CoursRepository coursRepository = context.getBean(CoursRepository.class);
 		ProfesseurRepository professeurRepository = context.getBean(ProfesseurRepository.class);
 
 		/*Section section = dao.getOne(1010);
@@ -43,11 +43,15 @@ public class DemojpaApplication
 		/*System.out.println(coursRepository.getOne("EG1010"));
 		coursRepository.getAll().forEach(System.out::println);*/
 
+		System.out.println("---GET ALL---");
 		professeurRepository.getAll().forEach(System.out::println);
+		System.out.println("---CREATE---");
 		professeurRepository.insert(new Professeur(7, "testo", "testi", 1315, 417, "test@test.test", LocalDateTime.of(1993, 6, 30, 15, 15), 4500));
 		System.out.println(professeurRepository.getOne(7));
-		professeurRepository.update(7, new Professeur(7, "supprimer", "supprimer", 1315, 417, "test@test.test", LocalDateTime.of(1993, 6, 30, 15, 15), 4500));
+		System.out.println("---UPDATE---");
+		professeurRepository.update(7, new Professeur(7, "supprimer", "supprimer", 1010, 2000, "supprimer@test.test", LocalDateTime.of(2022, 3, 30, 15, 15), 200));
 		System.out.println(professeurRepository.getOne(7));
+		System.out.println("---DELETE---");
 		professeurRepository.delete(7);
 		professeurRepository.getAll().forEach(System.out::println);
 	}
