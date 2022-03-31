@@ -50,19 +50,7 @@ public class ProfesseurRepository
     @Transactional
     public void update(Professeur updated)
     {
-        Optional<Professeur> toUpdate = getOne(updated.getId());
-
-        toUpdate.ifPresent((value) -> {
-            value.setName(updated.getName());
-            value.setSurname(updated.getSurname());
-            value.setSectionId(updated.getSectionId());
-            value.setOffice(updated.getOffice());
-            value.setEmail(updated.getEmail());
-            value.setHireDate(updated.getHireDate());
-            value.setWage(updated.getWage());
-            manager.merge(value);
-            manager.flush();
-            manager.close();
-        });
+        manager.merge(updated);
+        manager.flush();
     }
 }
