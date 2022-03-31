@@ -49,7 +49,7 @@ public class DemojpaApplication
 		professeurRepository.insert(new Professeur(7, "testo", "testi", 1315, 417, "test@test.test", LocalDateTime.of(1993, 6, 30, 15, 15), 4500));
 		System.out.println(professeurRepository.getOne(7));
 		System.out.println("---UPDATE---");
-		professeurRepository.update(7, new Professeur(7, "supprimer", "supprimer", 1010, 2000, "supprimer@test.test", LocalDateTime.of(2022, 3, 30, 15, 15), 200));
+		professeurRepository.update(new Professeur(7, "supprimer", "supprimer", 1010, 2000, "supprimer@test.test", LocalDateTime.of(2022, 3, 30, 15, 15), 200));
 		System.out.println(professeurRepository.getOne(7));
 		System.out.println("---DELETE---");
 		professeurRepository.delete(7);

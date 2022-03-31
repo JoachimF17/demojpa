@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public class ProfesseurRepository
@@ -18,9 +19,9 @@ public class ProfesseurRepository
         this.manager = manager;
     }
 
-    public Professeur getOne(long id)
+    public Optional<Professeur> getOne(long id)
     {
-        return manager.find(Professeur.class, id);
+        return Optional.ofNullable(manager.find(Professeur.class, id));
     }
 
     public List<Professeur> getAll()
@@ -31,37 +32,37 @@ public class ProfesseurRepository
     @Transactional
     public void insert(Professeur toInsert)
     {
-        if(getOne(toInsert.getId()) != null) throw new ElementAlreadyExistsException();
+        if(getOne(toInsert.getId()).isPresent()) throw new ElementAlreadyExistsException();
 
         manager.persist(toInsert);
     }
 
     @Transactional
-    public Professeur delete(long id)
+    public void delete(long id)
     {
-        Professeur toDelete = getOne(id);
+        Optional<Professeur> toDelete = getOne(id);
 
-        if(toDelete != null) manager.remove(toDelete);
-
-        return toDelete;
+        toDelete.ifPresent(manager::remove);
+        manager.flush();
+        manager.close();
     }
 
     @Transactional
-    public Professeur update(long id, Professeur updated)
+    public void update(Professeur updated)
     {
-        Professeur toUpdate = getOne(id);
+        Optional<Professeur> toUpdate = getOne(updated.getId());
 
-        if(toUpdate != null)
-        {
-            toUpdate.setName(updated.getName());
-            toUpdate.setSurname(updated.getSurname());
-            toUpdate.setSectionId(updated.getSectionId());
-            toUpdate.setOffice(updated.getOffice());
-            toUpdate.setEmail(updated.getEmail());
-            toUpdate.setHireDate(updated.getHireDate());
-            toUpdate.setWage(updated.getWage());
-        }
-
-        return toUpdate;
+        toUpdate.ifPresent((value) -> {
+            value.setName(updated.getName());
+            value.setSurname(updated.getSurname());
+            value.setSectionId(updated.getSectionId());
+            value.setOffice(updated.getOffice());
+            value.setEmail(updated.getEmail());
+            value.setHireDate(updated.getHireDate());
+            value.setWage(updated.getWage());
+            manager.merge(value);
+            manager.flush();
+            manager.close();
+        });
     }
 }

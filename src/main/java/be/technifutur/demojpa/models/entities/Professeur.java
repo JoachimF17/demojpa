@@ -20,10 +20,10 @@ public class Professeur
     @Id @Column(name = "professor_id", columnDefinition = "int(11)")
     private long id;
 
-    @Column(name = "professor_name")
+    @Column(name = "professor_name", length = 30)
     private String name;
 
-    @Column(name = "professor_surname")
+    @Column(name = "professor_surname", length = 30)
     private String surname;
 
     @Column(columnDefinition = "int(11)")
@@ -32,7 +32,7 @@ public class Professeur
     @Column(name = "professor_office", columnDefinition = "int(11)")
     private long office;
 
-    @Column(name = "professor_email")
+    @Column(name = "professor_email", length = 30)
     private String email;
 
     @Column(name = "professor_hire_date", columnDefinition = "datetime")
