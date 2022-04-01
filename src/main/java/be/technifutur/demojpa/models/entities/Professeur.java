@@ -2,17 +2,14 @@ package be.technifutur.demojpa.models.entities;
 
 import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "Professor")
 @Getter
 @Setter
-@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 public class Professeur
@@ -40,4 +37,11 @@ public class Professeur
 
     @Column(name = "professor_wage", columnDefinition = "int(11)")
     private long wage;
+
+    @ManyToOne
+    @JoinColumn(name = "section_id")
+    private Section section;
+
+    @OneToMany(mappedBy = "professeur")
+    private List<Cours> coursDonnes;
 }

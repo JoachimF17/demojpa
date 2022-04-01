@@ -2,19 +2,23 @@ package be.technifutur.demojpa.models.entities;
 
 import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
-@Getter @Setter @ToString
+@Getter @Setter
 @AllArgsConstructor @NoArgsConstructor
 public class Section
 {
     @Id @Column(name = "section_id", columnDefinition = "INT(11)")
     private long id;
+
     @Column(name = "section_name")
     private String name;
+
     @Column(columnDefinition = "INT(11)")
     private Long delegateId;
+
+    @OneToMany(mappedBy = "section")
+    private List<Professeur> professeurs;
 }
